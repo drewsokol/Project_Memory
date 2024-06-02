@@ -1,0 +1,63 @@
+{
+	"categories": [
+		{
+			"uuid": "0d2cca54-8774-4cb7-b7d5-53ce1a82ecaf",
+			"title": "Task",
+			"color": "70bafa"
+		}
+	],
+	"stages": [
+		{
+			"uuid": "665ce7e7-b99c-454d-889d-c440a29a7524",
+			"title": "Todo",
+			"tasks": [
+				"39e528db-d186-4863-b206-6de06f06396c"
+			]
+		},
+		{
+			"uuid": "3e66d2f3-4a04-4ce6-b9cd-88fb53d965ab",
+			"title": "Doing",
+			"tasks": []
+		},
+		{
+			"uuid": "387fb4cd-9561-4ee5-8a2b-5d504a2ac34f",
+			"title": "Done",
+			"tasks": []
+		}
+	],
+	"tasks": [
+		{
+			"uuid": "39e528db-d186-4863-b206-6de06f06396c",
+			"title": "New task",
+			"description": "A series of steps to complete this task",
+			"category": "0d2cca54-8774-4cb7-b7d5-53ce1a82ecaf",
+			"steps": [
+				{
+					"details": "do this",
+					"done": false
+				},
+				{
+					"details": "then this",
+					"done": false
+				},
+				{
+					"details": "finally this",
+					"done": false
+				}
+			]
+		}
+	],
+	"layout": {
+		"columns": [
+			[
+				"665ce7e7-b99c-454d-889d-c440a29a7524"
+			],
+			[
+				"3e66d2f3-4a04-4ce6-b9cd-88fb53d965ab"
+			],
+			[
+				"387fb4cd-9561-4ee5-8a2b-5d504a2ac34f"
+			]
+		]
+	}
+}
