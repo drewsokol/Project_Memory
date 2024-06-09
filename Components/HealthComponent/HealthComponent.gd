@@ -9,8 +9,8 @@ var max_health: int = 100
 var current_health: int = 100
 
 # Set the maximum health value
-func set_max_health(max_health: int):
-	self.max_health = max_health
+func set_max_health(new_max_health: int):
+	max_health = new_max_health
 	if current_health > max_health:
 		var old_health = current_health
 		current_health = max_health
