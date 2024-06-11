@@ -1,8 +1,5 @@
 class_name Player extends CharacterBody2D
 
-var cardinal_direction : Vector2 = Vector2.DOWN
-var direction : Vector2 = Vector2.ZERO
-var move_speed : float = 200.0
 var state : String = "idle_down"
 
 @onready var animation_player = $AnimationPlayer
@@ -10,30 +7,20 @@ var state : String = "idle_down"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$InputComponent.move_changed.connect(_on_move_changed)
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	SetDirection()
-	state = GetState()
-	print(direction)
-	print(state)
-	velocity = direction * move_speed
-	UpdateAnimation()
-	
 func _physics_process(delta):
 	move_and_slide()
 
 func SetDirection() -> bool:
-	direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	direction.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 	return true
 	
 func UpdateAnimation() -> void:
 	animation_player.play(state)
 	
 func GetState() -> String:
+	var direction = $VelocityComponent.getVelocity()
 	if direction.x < 0:
 		return "run_left"
 	elif direction.x > 0:
@@ -52,4 +39,10 @@ func GetState() -> String:
 		elif state == "run_up":
 			return "idle_up"
 	return "idle_down"
+	
+func _on_move_changed(new_direction: Vector2):
+	$VelocityComponent.setDirection(new_direction)
+	state = GetState()
+	velocity = $VelocityComponent.getVelocity()
+	UpdateAnimation()
 	
