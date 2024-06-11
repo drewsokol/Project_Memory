@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bljwvhhbp36cp"]
+[gd_scene load_steps=16 format=3 uid="uid://bljwvhhbp36cp"]
 
 [ext_resource type="Texture2D" uid="uid://bwvuhqgclex63" path="res://Player/Assets/PlayerSpriteAlpha-Sheet.png" id="1_qv2xk"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_uqigu"]
+[ext_resource type="PackedScene" uid="uid://c6eji6vu40ag2" path="res://Components/VelocityComponents/VelocityComponent.tscn" id="3_2irpk"]
+[ext_resource type="PackedScene" uid="uid://cki33und1y2pn" path="res://Components/InputComponent/InputComponent.tscn" id="4_v16pn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t8ah2"]
 radius = 16.1245
@@ -187,3 +189,7 @@ frame = 10
 libraries = {
 "": SubResource("AnimationLibrary_nnfhk")
 }
+
+[node name="VelocityComponent" parent="." instance=ExtResource("3_2irpk")]
+
+[node name="InputComponent" parent="." instance=ExtResource("4_v16pn")]
