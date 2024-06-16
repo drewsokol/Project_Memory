@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sjsys4r0pn6q"
-path="res://.godot/imported/Wasteland_tileset.png-3a1f59b2269551ca21cd35a4a646d787.ctex"
+uid="uid://bfs83fe7gec2w"
+path="res://.godot/imported/Wasteland_tileset.png-82a7fc7da6fb95b190841c47c42c8f45.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Wasteland_tileset.png"
-dest_files=["res://.godot/imported/Wasteland_tileset.png-3a1f59b2269551ca21cd35a4a646d787.ctex"]
+source_file="res://Regions/tilesets/Wasteland_tileset.png"
+dest_files=["res://.godot/imported/Wasteland_tileset.png-82a7fc7da6fb95b190841c47c42c8f45.ctex"]
 
 [params]
 
