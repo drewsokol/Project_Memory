@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cki33und1y2pn" path="res://Components/InputComponent/InputComponent.tscn" id="4_v16pn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t8ah2"]
-radius = 16.1245
+radius = 12.0
 
 [sub_resource type="Animation" id="Animation_6p3tl"]
 length = 0.001
