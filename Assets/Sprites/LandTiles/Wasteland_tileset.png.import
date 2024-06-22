@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwvuhqgclex63"
-path="res://.godot/imported/PlayerSpriteAlpha-Sheet.png-1004d374b3c2c5ac8fface6bc470cdab.ctex"
+uid="uid://bukrhq0qubgq6"
+path="res://.godot/imported/Wasteland_tileset.png-1460f1decec6e3ef0108a6a959995a53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Assets/PlayerSpriteAlpha-Sheet.png"
-dest_files=["res://.godot/imported/PlayerSpriteAlpha-Sheet.png-1004d374b3c2c5ac8fface6bc470cdab.ctex"]
+source_file="res://Assets/Sprites/LandTiles/Wasteland_tileset.png"
+dest_files=["res://.godot/imported/Wasteland_tileset.png-1460f1decec6e3ef0108a6a959995a53.ctex"]
 
 [params]
 
