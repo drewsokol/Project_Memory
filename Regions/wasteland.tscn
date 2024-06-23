@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2k7fmdsu8ih"]
+[gd_scene load_steps=6 format=3 uid="uid://c2k7fmdsu8ih"]
 
 [ext_resource type="Texture2D" uid="uid://ck6s70it7j6o" path="res://Assets/Sprites/LandTiles/desert_blocks.png" id="1_r7h6n"]
 [ext_resource type="PackedScene" uid="uid://bljwvhhbp36cp" path="res://Player/player.tscn" id="2_j1t3w"]
+[ext_resource type="PackedScene" uid="uid://deqivb1ye3jnv" path="res://hud.tscn" id="3_2vios"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_motpr"]
 texture = ExtResource("1_r7h6n")
@@ -193,3 +194,5 @@ layer_1/tile_data = PackedInt32Array(1048586, 65553, 0, 1114122, 65553, 65536, 1
 
 [node name="player" parent="." instance=ExtResource("2_j1t3w")]
 position = Vector2(436, 232)
+
+[node name="HUD" parent="." instance=ExtResource("3_2vios")]

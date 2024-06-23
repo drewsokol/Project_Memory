@@ -3,6 +3,7 @@ class_name HealthComponent extends Node2D
 # Signals
 signal health_changed(old_health, new_health)
 signal health_depleted()
+signal max_health_changed(new_max_health)
 
 # Health Variables
 var max_health: int = 100
@@ -12,9 +13,8 @@ var current_health: int = 100
 func set_max_health(new_max_health: int):
 	max_health = new_max_health
 	if current_health > max_health:
-		var old_health = current_health
 		current_health = max_health
-		emit_signal("health_changed", old_health, current_health)
+	emit_signal("max_health_changed", max_health)
 	
 # Get current maximum health value
 func get_max_health() -> int:

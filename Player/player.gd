@@ -7,8 +7,12 @@ var state : String = "idle_down"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# connect input signals
 	$InputComponent.move_changed.connect(_on_move_changed)
-	pass # Replace with function body.
+	
+	# connect hud signals
+	$HealthComponent.max_health_changed.connect(_on_max_health_changed)
+	$HealthComponent.health_changed.connect(_on_health_changed)
 
 func _physics_process(delta):
 	move_and_slide()
@@ -46,3 +50,8 @@ func _on_move_changed(new_direction: Vector2):
 	velocity = $VelocityComponent.getVelocity()
 	UpdateAnimation()
 	
+func _on_health_changed(old_health, new_health):
+	HudManager.player_health_changed.emit(float(new_health-old_health))
+	
+func _on_max_health_changed(new_max_health):
+	HudManager.player_set_max_health.emit(float(new_max_health))
