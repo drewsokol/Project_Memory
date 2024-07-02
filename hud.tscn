@@ -7,7 +7,10 @@
 script = ExtResource("1_ifvgy")
 
 [node name="HealthBar" parent="." instance=ExtResource("1_5d8wk")]
-offset_left = 7.0
-offset_top = 481.0
-offset_right = -569.72
-offset_bottom = 600.86
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+offset_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 0

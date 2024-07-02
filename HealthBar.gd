@@ -3,6 +3,9 @@ class_name HealthBar extends Control
 var max_health: float = 100
 @onready var progress_bar: TextureProgressBar = $TextureProgressBar
 
+func _ready():
+	progress_bar.value = max_health
+
 func set_current_health(new_value: float):
 	progress_bar.value = clamp(new_value/max_health * 100, 0, 100)
 	
