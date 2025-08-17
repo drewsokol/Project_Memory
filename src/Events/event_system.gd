@@ -20,7 +20,8 @@ func unsubscribe(event_category: EventCategory.Category, callback: Callable) -> 
 
 func register_publisher(event_category: EventCategory.Category, publisher_signal: Signal) -> void:
 	if _signals.has(event_category):
-		var relay = func(event_data: EventData): _signals[event_category].emit(event_data)
+		# var relay = func(event_data: EventData): _signals[event_category].emit(event_data)
+		var relay = func(event_data: EventData): print("firing relay for data", event_data)
 		publisher_signal.connect(relay)
 	else:
 		push_warning("No signal defined for category: %s" % event_category)

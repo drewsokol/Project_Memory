@@ -1,12 +1,16 @@
 class_name InputComponent extends Node2D
 
 signal move_changed(direction)
+signal grappling_hook_fired(direction)
+
 var current_move_direction = Vector2.ZERO
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if is_movement_changed():
 		on_move_changed()
+	if is_grappling_hook_fired():
+		on_grappling_hook_fired()
 
 # Check if movement keys have changed
 func is_movement_changed() -> bool:
@@ -19,6 +23,14 @@ func is_movement_changed() -> bool:
 	
 	current_move_direction = new_direction
 	return true
+	
+func is_grappling_hook_fired() -> bool:
+	if Input.is_action_just_pressed("fire_grappling_hook"):
+		return true
+	return false
+	
+func on_grappling_hook_fired():
+	grappling_hook_fired.emit(current_move_direction)
 	
 # Broadcast new movemnt signals
 func on_move_changed():

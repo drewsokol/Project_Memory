@@ -7,3 +7,8 @@ var type: String
 
 # The node that emitted the event.
 var emitter: Node
+
+# A special method called by the `print()` function.
+func _to_string():
+	return "[EventData: type=%s, emitter=%s]" % [type, emitter.name if emitter else "null"]
+	

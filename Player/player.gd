@@ -5,10 +5,14 @@ var state : String = "idle_down"
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D
 
+signal player_action(event_data: EventData)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_register_global_actions()
 	# connect input signals
 	$InputComponent.move_changed.connect(_on_move_changed)
+	$InputComponent.grappling_hook_fired.connect(_on_grappling_fired)
 	
 	## connect hud signals
 	#$HealthComponent.max_health_changed.connect(_on_max_health_changed)
@@ -19,6 +23,9 @@ func _ready():
 
 func _physics_process(delta):
 	move_and_slide()
+	
+func _register_global_actions():
+	Events.register_publisher(EventCategory.Category.PLAYER_ACTION, player_action)
 
 func SetDirection() -> bool:
 	return true
@@ -52,6 +59,12 @@ func _on_move_changed(new_direction: Vector2):
 	state = GetState()
 	velocity = $VelocityComponent.getVelocity()
 	UpdateAnimation()
+	
+func _on_grappling_fired(direction: Vector2):
+	var data = EventData.new()
+	data.type = "TestEvent"
+	data.emitter = self
+	player_action.emit(data)
 	
 #func _on_health_changed(old_health, new_health):
 	#HudManager.player_health_changed.emit(float(new_health-old_health))
