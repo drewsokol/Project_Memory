@@ -1,4 +1,4 @@
-class_name EventManager extends Node
+class_name EventSystem extends Node
 
 var _signals: Dictionary = {
 	EventCategory.Category.PLAYER_ACTION: Signal(self, "player_action_signal"),
