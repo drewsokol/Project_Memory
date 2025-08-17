@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://deqivb1ye3jnv"]
 
 [ext_resource type="PackedScene" uid="uid://phd241e3yb50" path="res://Components/UI_Components/HealthBarComponent/health_bar.tscn" id="1_5d8wk"]
-[ext_resource type="Script" path="res://hud.gd" id="1_ifvgy"]
+[ext_resource type="Script" uid="uid://vvy8ihstc1i0" path="res://hud.gd" id="1_ifvgy"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ifvgy")

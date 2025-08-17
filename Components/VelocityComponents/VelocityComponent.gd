@@ -1,7 +1,7 @@
 class_name VelocityComponent extends Node2D
 
 var current_velocity: Vector2 = Vector2.ZERO
-var move_speed: float = 200
+var move_speed: float = 150
 
 # Set current direction for velocity
 func setDirection(new_direction: Vector2):

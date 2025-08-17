@@ -10,9 +10,12 @@ func _ready():
 	# connect input signals
 	$InputComponent.move_changed.connect(_on_move_changed)
 	
-	# connect hud signals
-	$HealthComponent.max_health_changed.connect(_on_max_health_changed)
-	$HealthComponent.health_changed.connect(_on_health_changed)
+	## connect hud signals
+	#$HealthComponent.max_health_changed.connect(_on_max_health_changed)
+	#$HealthComponent.health_changed.connect(_on_health_changed)
+	
+	#start animations
+	UpdateAnimation()
 
 func _physics_process(delta):
 	move_and_slide()
@@ -26,21 +29,21 @@ func UpdateAnimation() -> void:
 func GetState() -> String:
 	var direction = $VelocityComponent.getVelocity()
 	if direction.x < 0:
-		return "run_left"
+		return "walk_left"
 	elif direction.x > 0:
-		return "run_right"
+		return "walk_right"
 	elif direction.y < 0:
-		return "run_up"
+		return "walk_up"
 	elif direction.y > 0:
-		return "run_down"
+		return "walk_down"
 	if direction.x == 0 and direction.y == 0:
 		if state.split("_")[0] == "idle":
 			return state
-		if state == "run_left":
+		if state == "walk_left":
 			return "idle_left"
-		elif state == "run_right":
+		elif state == "walk_right":
 			return "idle_right"
-		elif state == "run_up":
+		elif state == "walk_up":
 			return "idle_up"
 	return "idle_down"
 	
@@ -50,8 +53,8 @@ func _on_move_changed(new_direction: Vector2):
 	velocity = $VelocityComponent.getVelocity()
 	UpdateAnimation()
 	
-func _on_health_changed(old_health, new_health):
-	HudManager.player_health_changed.emit(float(new_health-old_health))
-	
-func _on_max_health_changed(new_max_health):
-	HudManager.player_set_max_health.emit(float(new_max_health))
+#func _on_health_changed(old_health, new_health):
+	#HudManager.player_health_changed.emit(float(new_health-old_health))
+	#
+#func _on_max_health_changed(new_max_health):
+	#HudManager.player_set_max_health.emit(float(new_max_health))

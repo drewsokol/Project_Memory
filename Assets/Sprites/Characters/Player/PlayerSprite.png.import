@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck6s70it7j6o"
-path="res://.godot/imported/desert_blocks.png-45867cb08a2430002d8b2beba9401fb6.ctex"
+uid="uid://b1r72xk4ql2bv"
+path="res://.godot/imported/PlayerSprite.png-e8c03e8bd2ae9b7c6c60f6d63dee415b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/LandTiles/desert_blocks.png"
-dest_files=["res://.godot/imported/desert_blocks.png-45867cb08a2430002d8b2beba9401fb6.ctex"]
+source_file="res://Assets/Sprites/Characters/Player/PlayerSprite.png"
+dest_files=["res://.godot/imported/PlayerSprite.png-e8c03e8bd2ae9b7c6c60f6d63dee415b.ctex"]
 
 [params]
 

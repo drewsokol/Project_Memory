@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://phd241e3yb50"]
 
-[ext_resource type="Script" path="res://HealthBar.gd" id="1_5ueb6"]
+[ext_resource type="Script" uid="uid://bf56u1bakdh72" path="res://HealthBar.gd" id="1_5ueb6"]
 [ext_resource type="Texture2D" uid="uid://vd1sgmkb7ps3" path="res://Assets/Sprites/UI/health_bar_progress_background.png" id="2_t4lxn"]
 [ext_resource type="Texture2D" uid="uid://cugc6rpwem8up" path="res://Assets/Sprites/UI/health_bar_background.png" id="3_kcocy"]
 [ext_resource type="Texture2D" uid="uid://bwxv23ys5m2ri" path="res://Assets/Sprites/UI/health_bar_progress_foreground.png" id="4_ixksx"]
@@ -8,6 +8,7 @@
 [node name="HealthBar" type="Control"]
 custom_minimum_size = Vector2(224, 32)
 layout_mode = 3
+anchors_preset = 0
 offset_right = 224.0
 offset_bottom = 32.0
 grow_horizontal = 2
