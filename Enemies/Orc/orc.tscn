@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bogfxf4duhbrn"]
+
+[ext_resource type="Script" uid="uid://dhshhpxbhsnki" path="res://Enemies/Orc/orc.gd" id="1_brxcc"]
+[ext_resource type="Texture2D" uid="uid://dk1fgu623lfhr" path="res://Assets/Sprites/Characters/Enemies/Orc/NPC Character Set_Orc/$Orc 01.png" id="1_iipbh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iipbh"]
+radius = 13.0384
+
+[node name="Orc" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_brxcc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_iipbh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_iipbh")
+offset = Vector2(0, -24)
+hframes = 3
+vframes = 4
+frame = 1

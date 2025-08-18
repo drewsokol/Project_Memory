@@ -79,6 +79,7 @@ fire_grappling_hook={
 
 2d_physics/layer_1="player"
 2d_physics/layer_2="map_tiles"
+2d_physics/layer_3="enemies"
 
 [rendering]
 

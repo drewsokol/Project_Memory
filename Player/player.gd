@@ -61,9 +61,10 @@ func _on_move_changed(new_direction: Vector2):
 	UpdateAnimation()
 	
 func _on_grappling_fired(direction: Vector2):
-	var data = EventData.new()
-	data.type = "TestEvent"
-	data.emitter = self
+	#temp distance for now
+	var dist = 10
+	var target = self.global_position +  (direction * dist)
+	var data = GrapplingHookFiredEventData.new(self, target)
 	player_action.emit(data)
 	
 #func _on_health_changed(old_health, new_health):
