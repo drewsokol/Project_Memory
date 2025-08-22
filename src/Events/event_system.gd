@@ -1,10 +1,12 @@
 class_name EventSystem extends Node
 
 var _signals: Dictionary = {
+	EventCategory.Category.LOCAL: Signal(self, "local_event_signal"),
+	EventCategory.Category.ENVIRONMENT_ACTION: Signal(self, "environment_action_signal"),
 	EventCategory.Category.PLAYER_ACTION: Signal(self, "player_action_signal"),
-	EventCategory.Category.ENVIRONMENT_ACTION: Signal(self, "environment_action_signal")
 }
 
+signal local_event_signal(event: EventData)
 signal player_action_signal(event: EventData)
 signal environment_action_signal(event: EventData)
 
