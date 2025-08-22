@@ -65,6 +65,13 @@ func _on_grappling_fired(direction: Vector2):
 	var dist = 10
 	var target = self.global_position +  (direction * dist)
 	var data = GrapplingHookFiredEventData.new(self, target)
+	
+	var state = GetState()
+	if state == "walk_right" or state == "idle_right":
+		state = "grappling_fire_right"
+		print("state is now: ", state)
+	
+	UpdateAnimation()
 	player_action.emit(data)
 	
 #func _on_health_changed(old_health, new_health):
