@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dadaukp6tw7x1" path="res://Components/StateMachineComponent/StateComponent.tscn" id="3_od3ui"]
 [ext_resource type="Resource" uid="uid://casq8vgr5qua7" path="res://Player/player_state_resource.tres" id="4_od3ui"]
 [ext_resource type="PackedScene" uid="uid://cki33und1y2pn" path="res://Components/InputComponent/InputComponent.tscn" id="4_v16pn"]
-[ext_resource type="PackedScene" uid="uid://bdm4q68uapt2r" path="res://Components/AnimationComponent/AnimationComponent.tscn" id="5_00tjw"]
+[ext_resource type="PackedScene" uid="uid://bdgl0rjqtxrcj" path="res://Components/AnimationComponent/AnimationComponent.tscn" id="5_00tjw"]
 [ext_resource type="PackedScene" uid="uid://dmu85uj8omyf6" path="res://Components/HealthComponent/HealthComponent.tscn" id="5_wruk2"]
 
 [sub_resource type="Animation" id="Animation_6p3tl"]
@@ -201,10 +201,20 @@ script = ExtResource("1_uqigu")
 
 [node name="LocalEventBus" parent="." instance=ExtResource("2_vtle1")]
 
-[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player", "sprite_2d") instance=ExtResource("5_00tjw")]
+[node name="StateMachineComponent" parent="." node_paths=PackedStringArray("local_event_bus") instance=ExtResource("3_od3ui")]
+init_resource = ExtResource("4_od3ui")
+local_event_bus = NodePath("../LocalEventBus")
+
+[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player", "sprite_2d", "local_event_bus") instance=ExtResource("5_00tjw")]
 animation_player = NodePath("AnimationPlayer")
 sprite_2d = NodePath("Sprite2D")
-local_event_bus_path = NodePath("../LocalEventBus")
+local_event_bus = NodePath("../LocalEventBus")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_nnfhk")
+}
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimationComponent"]
 position = Vector2(0, -30)
@@ -213,23 +223,13 @@ offset = Vector2(0, 16)
 hframes = 5
 vframes = 5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
-root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_nnfhk")
-}
-
-[node name="StateMachineComponent" parent="." instance=ExtResource("3_od3ui")]
-init_resource = ExtResource("4_od3ui")
-local_event_bus_path = NodePath("../LocalEventBus")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_t8ah2")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_2irpk")]
 
-[node name="InputComponent" parent="." instance=ExtResource("4_v16pn")]
-local_event_bus_path = NodePath("../LocalEventBus")
+[node name="InputComponent" parent="." node_paths=PackedStringArray("local_event_bus") instance=ExtResource("4_v16pn")]
+local_event_bus = NodePath("../LocalEventBus")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

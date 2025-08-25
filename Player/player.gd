@@ -2,8 +2,8 @@ class_name Player extends CharacterBody2D
 
 var state : String = "idle_down"
 
-@onready var animation_player = $AnimationPlayer
-@onready var sprite = $Sprite2D
+@onready var animation_player = $AnimationComponent/AnimationPlayer
+@onready var sprite = $AnimationComponent/Sprite2D
 
 signal player_action(event_data: EventData)
 

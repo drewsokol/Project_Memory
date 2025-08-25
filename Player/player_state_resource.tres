@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="StateMachineResource" load_steps=2 format=3 uid="uid://casq8vgr5qua7"]
+
+[ext_resource type="Script" uid="uid://cgfsme6v51u8g" path="res://src/StateGraph/state_machine_resource.gd" id="1_ghiqr"]
+
+[resource]
+script = ExtResource("1_ghiqr")
+states = Array[Dictionary]([{
+"data": {},
+"id": "idle",
+"on_enter": {
+"method_name": "on_idle_enter",
+"script_path": "res://Player/player_state_callables.gd"
+}
+}, {
+"data": {},
+"id": "walk",
+"on_enter": {
+"method_name": "on_walk_run_enter",
+"script_path": "res://Player/player_state_callables.gd"
+}
+}])
+transitions = Array[Dictionary]([{
+"event": "input.move_pressed",
+"event_requirement": {
+"method_name": "idle_to_walk",
+"script_path": "res://Player/player_state_callables.gd"
+},
+"from_id": "idle",
+"to_id": "walk"
+}, {
+"event": "input.move_released",
+"event_requirement": {
+"method_name": "move_to_idle",
+"script_path": "res://Player/player_state_callables.gd"
+},
+"from_id": "walk",
+"to_id": "idle"
+}])
+metadata/_custom_type_script = "uid://cgfsme6v51u8g"

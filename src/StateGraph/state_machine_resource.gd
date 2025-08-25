@@ -1,6 +1,6 @@
 class_name StateMachineResource extends Resource
 
-# [{id: String, data: Dictionary}]
+# [{id: String, data: Dictionary, on_enter: Dictionary}]
 @export var states: Array[Dictionary] = []
 
 # [{from_id: String, to_id: String, event: String, event_requirement: Dictionary, data: Dictionary, conditions_met: Dictionary}]

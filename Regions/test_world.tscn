@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://bqoym4bxvkdxv"]
 
-[ext_resource type="PackedScene" uid="uid://bljwvhhbp36cp" path="res://Player/player.tscn" id="1_v6wxt"]
 [ext_resource type="Texture2D" uid="uid://bol60hv43q8w2" path="res://Assets/Sprites/LandTiles/basic_tiles.png" id="2_16abq"]
+[ext_resource type="PackedScene" uid="uid://bljwvhhbp36cp" path="res://Player/player.tscn" id="3_6aou7"]
 [ext_resource type="PackedScene" uid="uid://bogfxf4duhbrn" path="res://Enemies/Orc/orc.tscn" id="3_g4gm7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fdslh"]
@@ -184,8 +184,8 @@ use_parent_material = true
 tile_map_data = PackedByteArray("AAAIAAYAAAACAAIAAAABAAYAAAAAAAIAAAABAAUAAAAAAAEAAAABAAQAAAAAAAEAAAABAAMAAAAAAAEAAAABAAIAAAAAAAEAAAAIAAUAAAACAAEAAAAIAAQAAAACAAEAAAAIAAMAAAACAAEAAAAIAAIAAAACAAEAAAAIAAEAAAACAAAAAAAHAAEAAAABAAAAAAAGAAEAAAABAAAAAAAFAAEAAAABAAAAAAAEAAEAAAABAAAAAAADAAEAAAABAAAAAAACAAEAAAABAAAAAAABAAEAAAAAAAAAAAACAAYAAAABAAIAAAADAAYAAAABAAIAAAAEAAYAAAABAAIAAAAFAAYAAAABAAIAAAAGAAYAAAABAAIAAAAHAAYAAAABAAIAAAACAAIAAAABAAEAAAACAAMAAAABAAEAAAACAAQAAAABAAEAAAADAAQAAAABAAEAAAADAAMAAAABAAEAAAACAAUAAAABAAEAAAADAAUAAAABAAEAAAAEAAUAAAABAAEAAAAFAAUAAAABAAEAAAAGAAUAAAABAAEAAAAHAAUAAAABAAEAAAAHAAQAAAABAAEAAAAHAAMAAAABAAEAAAAGAAMAAAABAAEAAAAGAAIAAAABAAEAAAAHAAIAAAABAAEAAAAFAAIAAAABAAEAAAAEAAIAAAABAAEAAAADAAIAAAABAAEAAAAEAAQAAAABAAEAAAAFAAQAAAABAAEAAAAGAAQAAAABAAEAAAAFAAMAAAABAAEAAAAEAAMAAAABAAEAAAA=")
 tile_set = SubResource("TileSet_mj4sf")
 
-[node name="player" parent="." instance=ExtResource("1_v6wxt")]
-position = Vector2(162, 118)
-
 [node name="Orc" parent="." instance=ExtResource("3_g4gm7")]
 position = Vector2(88, 120)
+
+[node name="player" parent="." instance=ExtResource("3_6aou7")]
+position = Vector2(168, 123)

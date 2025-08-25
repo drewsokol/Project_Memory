@@ -5,7 +5,7 @@ var from: GraphVertex  # Starting vertex
 var to: GraphVertex    # Ending vertex
 var data: Dictionary  # Custom data (e.g., weight, cost, etc.)
 
-func _init(_from: GraphVertex, _to: GraphVertex):
+func _init(_from: GraphVertex, _to: GraphVertex, _data: Dictionary = {}):
 	from = _from
 	to = _to
-	data = {}
+	data = _data

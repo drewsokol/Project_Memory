@@ -8,8 +8,8 @@ func _init():
 	super._init(true)
 
 # Internal: Add a state
-func _add_state(id: String, data: Dictionary = {}) -> StateVertex:
-	var state = StateVertex.new(id)
+func _add_state(id: String, on_enter: Callable, data: Dictionary = {}) -> StateVertex:
+	var state = StateVertex.new(id, on_enter)
 	state.data = data
 	vertices.append(state)
 	if current_state == null:
@@ -36,16 +36,21 @@ func get_state(id: String) -> StateVertex:
 	return null
 
 # Attempt to transition to a new state
-func transition_to(target_state_id: String) -> bool:
+func transition_to(target_state_id: String, event_name: String) -> bool:
 	var target_state = get_state(target_state_id)
 	if current_state == null or target_state == null:
 		return false
 	for edge in get_edges(current_state):
-		if edge.to == target_state and edge.can_transition(""):
+		if edge.to == target_state and edge.can_transition(event_name):
 			var old_state = current_state
 			current_state = target_state
-			state_changed.emit(old_state, current_state)
+			var data = {
+				"event": event_name,
+				"old_state_data": old_state.data
+			}
+			target_state._on_enter.call(target_state, data)
 			_clear_conditions_for_state(current_state)
+			state_changed.emit(old_state, current_state)
 			return true
 	return false
 
@@ -55,11 +60,7 @@ func handle_event(event: String) -> bool:
 		return false
 	for edge in get_edges(current_state):
 		if edge.can_transition(event):
-			var old_state = current_state
-			current_state = edge.to
-			state_changed.emit(old_state, current_state)
-			_clear_conditions_for_state(current_state)
-			return true
+			return transition_to(edge.to.id, event)
 	return false
 
 # Load state machine from a resource
@@ -67,22 +68,33 @@ func load_from_resource(resource: StateMachineResource) -> void:
 	vertices.clear()
 	edges.clear()
 	current_state = null
+	_load_states(resource.states)
+	_load_transitions(resource.transitions)
 
-	for state_data in resource.states:
-		_add_state(state_data.id, state_data.data)
+func _load_states(states: Array[Dictionary]) -> void:
+	vertices.clear()
+	for state_data in states:
+		var on_enter_callable = _reconstruct_callable(
+			state_data.get("on_enter", {})
+		)
+		var additional_data = state_data.get("data", {})
+		_add_state(state_data.id, on_enter_callable, additional_data)
 
-	for transition_data in resource.transitions:
+func _load_transitions(transitions: Array[Dictionary]) -> void:
+	edges.clear()
+	for transition_data in transitions:
 		var from_state = get_state(transition_data.from_id)
 		var to_state = get_state(transition_data.to_id)
 		if from_state and to_state:
-			var event_requirement = _reconstruct_event_requirement(
+			var event_requirement = _reconstruct_callable(
 				transition_data.get("event_requirement", {}),
-				transition_data.get("event", "")
 			)
-			var transition = _add_transition(from_state, to_state, event_requirement, transition_data.data)
+			var transition = _add_transition(from_state, to_state, event_requirement)
 			if transition_data.has("conditions_met"):
 				transition.conditions_met = transition_data.conditions_met
-				
+			if transition_data.has("data"):
+				transition.data = transition_data.data
+
 func serialize() -> Dictionary:
 	var state_data = []
 	for state in vertices:
@@ -130,9 +142,8 @@ func deserialize(data: Dictionary) -> void:
 		var from_state = get_state(transition_data.from_id)
 		var to_state = get_state(transition_data.to_id)
 		if from_state and to_state:
-			var event_requirement = _reconstruct_event_requirement(
-				transition_data.get("event_requirement", {}),
-				transition_data.get("event", "")
+			var event_requirement = _reconstruct_callable(
+				transition_data.get("event_requirement", {})
 			)
 			var transition = _add_transition(from_state, to_state, event_requirement, transition_data.get("data", {}))
 			transition.conditions_met = transition_data.get("conditions_met", {})
@@ -141,25 +152,18 @@ func deserialize(data: Dictionary) -> void:
 	if current_state_id != "":
 		current_state = get_state(current_state_id)
 
-func _reconstruct_event_requirement(er_dict: Dictionary, event: String = "") -> Callable:
-	var event_requirement = Callable()
-	if er_dict.has("script_path") and er_dict.has("method_name") and er_dict.script_path != "" and er_dict.method_name != "":
-		var script = load(er_dict.script_path)
+func _reconstruct_callable(callable_dict: Dictionary) -> Callable:
+	var callable = Callable()
+	if callable_dict.has("script_path") and callable_dict.has("method_name") and callable_dict.script_path != "" and callable_dict.method_name != "":
+		var script = load(callable_dict.script_path)
 		if script:
-			var instance = script.new()
-			if instance.has_method(er_dict.method_name):
-				event_requirement = Callable(instance, er_dict.method_name)
+			if script.has_method(callable_dict.method_name):
+				callable = Callable(script, callable_dict.method_name)
 			else:
-				push_warning("Method %s not found in script %s" % [er_dict.method_name, er_dict.script_path])
+				push_warning("Method %s not found in script %s" % [callable_dict.method_name, callable_dict.script_path])
 		else:
-			push_warning("Script not found: %s" % er_dict.script_path)
-	elif event != "":
-		var event_name = event
-		event_requirement = func(incoming_event: String, conditions: Dictionary) -> bool:
-			if event == event_name:
-				conditions[incoming_event] = true
-			return conditions.get(event_name, false)
-	return event_requirement
+			push_warning("Script not found: %s" % callable_dict.script_path)
+	return callable
 
 func _clear_conditions_for_state(state: StateVertex) -> void:
 	for edge in get_edges(state):
