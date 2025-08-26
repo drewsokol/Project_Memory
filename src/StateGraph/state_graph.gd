@@ -8,8 +8,8 @@ func _init():
 	super._init(true)
 
 # Internal: Add a state
-func _add_state(id: String, on_enter: Callable, data: Dictionary = {}) -> StateVertex:
-	var state = StateVertex.new(id, on_enter)
+func _add_state(id: String, on_enter: Callable, data: Dictionary = {}, update_self: bool = false) -> StateVertex:
+	var state = StateVertex.new(id, on_enter, update_self)
 	state.data = data
 	vertices.append(state)
 	if current_state == null:
@@ -61,6 +61,9 @@ func handle_event(event: String) -> bool:
 	for edge in get_edges(current_state):
 		if edge.can_transition(event):
 			return transition_to(edge.to.id, event)
+	if current_state.update_self:
+		current_state._on_enter.call(current_state, {"event": event, "old_state_data": current_state.data})
+		state_changed.emit(current_state, current_state)
 	return false
 
 # Load state machine from a resource
@@ -78,7 +81,8 @@ func _load_states(states: Array[Dictionary]) -> void:
 			state_data.get("on_enter", {})
 		)
 		var additional_data = state_data.get("data", {})
-		_add_state(state_data.id, on_enter_callable, additional_data)
+		var self_update = state_data.get("self_update", false)
+		_add_state(state_data.id, on_enter_callable, additional_data, self_update)
 
 func _load_transitions(transitions: Array[Dictionary]) -> void:
 	edges.clear()

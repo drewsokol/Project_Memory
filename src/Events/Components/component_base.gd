@@ -11,6 +11,8 @@ func _ready() -> void:
 	local_event_bus.subscribe(_on_local_event)
 	
 func _on_local_event(_event: EventData) -> void:
+	if _event.emitter == self:
+		return
 	if _event.type == "LocalEventData":
 		var _local_event = _event as LocalEventData
 		_process_event(_local_event)

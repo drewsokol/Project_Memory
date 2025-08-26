@@ -10,14 +10,16 @@ states = Array[Dictionary]([{
 "on_enter": {
 "method_name": "on_idle_enter",
 "script_path": "res://Player/player_state_callables.gd"
-}
+},
+"self_update": true
 }, {
 "data": {},
 "id": "walk",
 "on_enter": {
 "method_name": "on_walk_run_enter",
 "script_path": "res://Player/player_state_callables.gd"
-}
+},
+"self_update": true
 }])
 transitions = Array[Dictionary]([{
 "event": "input.move_pressed",

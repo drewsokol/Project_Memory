@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://beluxl1qa2o0x" path="res://Player/player.gd" id="1_uqigu"]
 [ext_resource type="Texture2D" uid="uid://c5gp5i3fy4m08" path="res://Assets/Sprites/Characters/Player/PlayerSprite.png" id="2_cxrjx"]
 [ext_resource type="PackedScene" uid="uid://col5bqr067sdc" path="res://src/Events/LocalEventBus/local_event_bus.tscn" id="2_vtle1"]
+[ext_resource type="Script" uid="uid://bj1jwbyw00y0n" path="res://Components/AnimationComponent/animation_component.gd" id="3_00tjw"]
 [ext_resource type="PackedScene" uid="uid://c6eji6vu40ag2" path="res://Components/VelocityComponents/VelocityComponent.tscn" id="3_2irpk"]
 [ext_resource type="PackedScene" uid="uid://dadaukp6tw7x1" path="res://Components/StateMachineComponent/StateComponent.tscn" id="3_od3ui"]
 [ext_resource type="Resource" uid="uid://casq8vgr5qua7" path="res://Player/player_state_resource.tres" id="4_od3ui"]
 [ext_resource type="PackedScene" uid="uid://cki33und1y2pn" path="res://Components/InputComponent/InputComponent.tscn" id="4_v16pn"]
-[ext_resource type="PackedScene" uid="uid://bdm4q68uapt2r" path="res://Components/AnimationComponent/AnimationComponent.tscn" id="5_00tjw"]
 [ext_resource type="PackedScene" uid="uid://dmu85uj8omyf6" path="res://Components/HealthComponent/HealthComponent.tscn" id="5_wruk2"]
 
 [sub_resource type="Animation" id="Animation_6p3tl"]
@@ -201,7 +201,8 @@ script = ExtResource("1_uqigu")
 
 [node name="LocalEventBus" parent="." instance=ExtResource("2_vtle1")]
 
-[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player", "sprite_2d") instance=ExtResource("5_00tjw")]
+[node name="AnimationComponent" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "sprite_2d")]
+script = ExtResource("3_00tjw")
 animation_player = NodePath("AnimationPlayer")
 sprite_2d = NodePath("Sprite2D")
 local_event_bus_path = NodePath("../LocalEventBus")

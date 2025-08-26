@@ -46,17 +46,18 @@ class PlayerInput:
 		return ""
 
 	static func get_move_event_from_vector(direction: Vector2, is_running: bool = false) -> String:
-		if direction.x < 0:
-			return RUN_LEFT if is_running else WALK_LEFT
-		elif direction.x > 0:
-			return RUN_RIGHT if is_running else WALK_RIGHT
-		elif direction.y < 0:
-			return RUN_UP if is_running else WALK_UP
-		elif direction.y > 0:
-			return RUN_DOWN if is_running else WALK_DOWN
-		elif direction == Vector2.ZERO:
+		if direction == Vector2.ZERO:
 			return MOVE_STOPPED
-		return ""
+		if abs(direction.x) > abs(direction.y):
+			if direction.x > 0:
+				return RUN_RIGHT if is_running else WALK_RIGHT
+			else:
+				return RUN_LEFT if is_running else WALK_LEFT
+		else:
+			if direction.y > 0:
+				return RUN_DOWN if is_running else WALK_DOWN
+			else:
+				return RUN_UP if is_running else WALK_UP
 
 class StateEvents:
 	
