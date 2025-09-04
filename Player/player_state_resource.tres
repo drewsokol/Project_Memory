@@ -20,6 +20,14 @@ states = Array[Dictionary]([{
 "script_path": "res://Player/player_state_callables.gd"
 },
 "self_update": true
+}, {
+"data": {},
+"id": "grapple_firing",
+"on_enter": {
+"method_name": "on_grapple_firing_enter",
+"script_path": "res://Player/player_state_callables.gd"
+},
+"self_update": false
 }])
 transitions = Array[Dictionary]([{
 "event": "input.move_pressed",
@@ -36,6 +44,38 @@ transitions = Array[Dictionary]([{
 "script_path": "res://Player/player_state_callables.gd"
 },
 "from_id": "walk",
+"to_id": "idle"
+}, {
+"event": "input.move_pressed",
+"event_requirement": {
+"method_name": "idle_to_walk",
+"script_path": "res://Player/player_state_callables.gd"
+},
+"from_id": "walk",
+"to_id": "walk"
+}, {
+"event": "input.move_released",
+"event_requirement": {
+"method_name": "idle_to_walk",
+"script_path": "res://Player/player_state_callables.gd"
+},
+"from_id": "idle",
+"to_id": "idle"
+}, {
+"event": "input.grapple_fired",
+"event_requirement": {
+"method_name": "can_fire_grapple",
+"script_path": "res://Player/player_state_callables.gd"
+},
+"from_id": "idle",
+"to_id": "grapple_firing"
+}, {
+"event": "input.grapple_fired_completed",
+"event_requirement": {
+"method_name": "grapple_firing_to_idle",
+"script_path": "res://Player/player_state_callables.gd"
+},
+"from_id": "grapple_firing",
 "to_id": "idle"
 }])
 metadata/_custom_type_script = "uid://cgfsme6v51u8g"

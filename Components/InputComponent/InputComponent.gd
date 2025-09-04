@@ -43,11 +43,21 @@ func is_grappling_hook_fired() -> bool:
 	
 func on_grappling_hook_fired():
 	grappling_hook_fired.emit(current_move_direction)
+	var grappling_hook_data = LocalEventData.new(
+		self,
+		PlayerEvents.PlayerInput.GRAPPLE_FIRE,
+		{"direction": current_move_direction}
+	)
+	local_signal.emit(grappling_hook_data)
 	
 # Broadcast new movemnt signals
 func on_move_changed():
 	move_changed.emit(current_move_direction)
-	var movement_data = LocalEventData.new(self, PlayerEvents.PlayerInput.get_move_event_from_vector(current_move_direction, is_running))
+	var movement_data = LocalEventData.new(
+		self,
+		PlayerEvents.PlayerInput.get_move_event_from_vector(current_move_direction, is_running),
+		{"direction": current_move_direction}
+		)
 	local_signal.emit(movement_data)
 	
 func cancel_movement():

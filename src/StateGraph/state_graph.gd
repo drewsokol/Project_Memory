@@ -61,9 +61,6 @@ func handle_event(event: String) -> bool:
 	for edge in get_edges(current_state):
 		if edge.can_transition(event):
 			return transition_to(edge.to.id, event)
-	if current_state.update_self:
-		current_state._on_enter.call(current_state, {"event": event, "old_state_data": current_state.data})
-		state_changed.emit(current_state, current_state)
 	return false
 
 # Load state machine from a resource

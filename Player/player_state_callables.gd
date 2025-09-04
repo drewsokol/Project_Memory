@@ -6,7 +6,6 @@ static func on_idle_enter(_new_state: StateVertex, _data) -> void:
 
 static func on_walk_run_enter(_new_state: StateVertex, _data) -> void:
 	var direction = _data.get("event", PlayerEvents.PlayerInput.WALK_DOWN)
-
 	match direction:
 		PlayerEvents.PlayerInput.WALK_LEFT, PlayerEvents.PlayerInput.RUN_LEFT:
 			_new_state.data["direction"] = "left"
@@ -19,6 +18,11 @@ static func on_walk_run_enter(_new_state: StateVertex, _data) -> void:
 		_:
 			_new_state.data["direction"] = "down"
 
+static func on_grapple_firing_enter(_new_state: StateVertex, _data) -> void:
+	print("Entered grapple firing state")
+	var direction = _data.get("old_state_data", {}).get("direction", "right")
+	_new_state.data["direction"] = direction
+
 static func idle_to_walk(event: String, _conditions: Dictionary = {}) -> bool:
 	return PlayerEvents.PlayerInput.is_walk_event(event)
 
@@ -27,3 +31,13 @@ static func idle_to_run(event: String, _conditions: Dictionary = {}) -> bool:
 
 static func move_to_idle(event: String, _conditions: Dictionary = {}) -> bool:
 	return event == PlayerEvents.PlayerInput.MOVE_STOPPED
+
+static func can_fire_grapple(event: String, _conditions: Dictionary = {}) -> bool:
+	return event == PlayerEvents.PlayerInput.GRAPPLE_FIRE
+
+static func grapple_firing_to_idle(event: String, _conditions: Dictionary = {}) -> bool:
+	print("Checking grapple_firing_to_idle with event: " + event)
+	if event.contains("grapple_firing") and event.contains("animation_finished"):
+		return true
+	return false
+		
