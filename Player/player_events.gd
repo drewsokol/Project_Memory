@@ -62,3 +62,10 @@ class PlayerInput:
 class StateEvents:
 	
 	const TO_IDLE = "state.enter.idle"
+
+class GrapplingEvents:
+
+	const GRAPPLE_FIRED_START = "grapple.fired.start"
+	const GRAPPLE_FIRED_COMPLETED = "grapple.fired.completed"
+	const GRAPPLE_RETRACT_START = "grapple.retract.start"
+	const GRAPPLE_RETRACT_COMPLETED = "grapple.retract.completed"

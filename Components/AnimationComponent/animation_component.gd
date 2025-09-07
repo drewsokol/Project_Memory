@@ -12,11 +12,12 @@ const animation_map :  Dictionary = {
 	"walk_up" : "walk_up",
 	"walk_down" : "walk_down",
 	"grapple_firing_right" : "grapple_firing_right",
+	"grapple_retracting_right" : "grapple_retracting_right"
 }
 
 func _process_event(_event: LocalEventData) -> void:
 	if(_event.name == "state_changed"):
-		print("AP processing event: " + _event.to_string())
+		print("AP Event: ", _event.to_string())
 		var animation = _event.data.get("new_state_id", "idle") + "_"
 		animation += _event.data.get("new_state_data", {}).get("direction", "down")
 		_play_animation(animation)

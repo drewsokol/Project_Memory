@@ -19,7 +19,10 @@ static func on_walk_run_enter(_new_state: StateVertex, _data) -> void:
 			_new_state.data["direction"] = "down"
 
 static func on_grapple_firing_enter(_new_state: StateVertex, _data) -> void:
-	print("Entered grapple firing state")
+	var direction = _data.get("old_state_data", {}).get("direction", "right")
+	_new_state.data["direction"] = direction
+
+static func on_grapple_retracting_enter(_new_state: StateVertex, _data) -> void:
 	var direction = _data.get("old_state_data", {}).get("direction", "right")
 	_new_state.data["direction"] = direction
 
@@ -35,9 +38,19 @@ static func move_to_idle(event: String, _conditions: Dictionary = {}) -> bool:
 static func can_fire_grapple(event: String, _conditions: Dictionary = {}) -> bool:
 	return event == PlayerEvents.PlayerInput.GRAPPLE_FIRE
 
-static func grapple_firing_to_idle(event: String, _conditions: Dictionary = {}) -> bool:
-	print("Checking grapple_firing_to_idle with event: " + event)
-	if event.contains("grapple_firing") and event.contains("animation_finished"):
+static func grapple_firing_to_grapple_retracting(event: String, _conditions: Dictionary = {}) -> bool:
+	if event.contains(PlayerEvents.GrapplingEvents.GRAPPLE_RETRACT_START):
 		return true
 	return false
 		
+static func grapple_retracting_to_idle(event: String, _conditions: Dictionary = {}) -> bool:
+	if event.contains(PlayerEvents.GrapplingEvents.GRAPPLE_RETRACT_COMPLETED):
+		_conditions[PlayerEvents.GrapplingEvents.GRAPPLE_RETRACT_COMPLETED] = true
+	if event.contains("grapple_retracting_") and event.contains("animation_finished"):
+		_conditions["grapple_retract_animation_completed"] = true
+
+	var animation_complete = _conditions.get("grapple_retract_animation_completed", false)
+	var retract_complete = _conditions.get(PlayerEvents.GrapplingEvents.GRAPPLE_RETRACT_COMPLETED, false)
+	var all_conditions_met = retract_complete and animation_complete
+
+	return all_conditions_met

@@ -27,4 +27,5 @@ func _on_state_changed(old_state: StateVertex, new_state: StateVertex) -> void:
 		data
 	)
 
+	print("changing state: ", local_event.to_string())
 	local_signal.emit(local_event)

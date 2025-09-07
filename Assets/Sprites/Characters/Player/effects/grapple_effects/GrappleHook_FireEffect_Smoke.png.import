@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxrigp72d2ykb"
-path="res://.godot/imported/PlayerSprite.png-e8c03e8bd2ae9b7c6c60f6d63dee415b.ctex"
+uid="uid://dr453t324drtv"
+path="res://.godot/imported/GrappleHook_FireEffect_Smoke.png-df511100fb9092244fb1dcc8ad5ed193.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Characters/Player/PlayerSprite.png"
-dest_files=["res://.godot/imported/PlayerSprite.png-e8c03e8bd2ae9b7c6c60f6d63dee415b.ctex"]
+source_file="res://Assets/Sprites/Characters/Player/effects/grapple_effects/GrappleHook_FireEffect_Smoke.png"
+dest_files=["res://.godot/imported/GrappleHook_FireEffect_Smoke.png-df511100fb9092244fb1dcc8ad5ed193.ctex"]
 
 [params]
 

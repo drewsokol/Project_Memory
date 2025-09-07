@@ -28,6 +28,14 @@ states = Array[Dictionary]([{
 "script_path": "res://Player/player_state_callables.gd"
 },
 "self_update": false
+}, {
+"data": {},
+"id": "grapple_retracting",
+"on_enter": {
+"method_name": "on_grapple_retracting_enter",
+"script_path": "res://Player/player_state_callables.gd"
+},
+"self_update": false
 }])
 transitions = Array[Dictionary]([{
 "event": "input.move_pressed",
@@ -70,12 +78,20 @@ transitions = Array[Dictionary]([{
 "from_id": "idle",
 "to_id": "grapple_firing"
 }, {
-"event": "input.grapple_fired_completed",
+"event": "grapple.retract.start",
 "event_requirement": {
-"method_name": "grapple_firing_to_idle",
+"method_name": "grapple_firing_to_grapple_retracting",
 "script_path": "res://Player/player_state_callables.gd"
 },
 "from_id": "grapple_firing",
+"to_id": "grapple_retracting"
+}, {
+"event": "grapple.retract.completed",
+"event_requirement": {
+"method_name": "grapple_retracting_to_idle",
+"script_path": "res://Player/player_state_callables.gd"
+},
+"from_id": "grapple_retracting",
 "to_id": "idle"
 }])
 metadata/_custom_type_script = "uid://cgfsme6v51u8g"
